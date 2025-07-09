@@ -2,7 +2,7 @@ class GameDeterminer
 {
     string secretWord;
     IEnumerable<char> guessedLetters;
-    int maxAttempts = 6;
+    int maxAttempts;
     Func<string, Task<string>>? getHintFunc;
 
     public GameDeterminer(string secretWord, int maxAttempts = 6, Func<string, Task<string>>? getHintFunc = null)
