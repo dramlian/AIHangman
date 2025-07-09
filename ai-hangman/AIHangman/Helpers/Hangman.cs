@@ -10,8 +10,14 @@ class Hangman
 
     public async Task StartGame()
     {
+        Console.WriteLine($"Welcome to Hangman! You have {gameDeterminer.GetRemainingAttempts()} attempts to guess the word.");
         while (!gameDeterminer.IsGameOver())
         {
+            var hint = await gameDeterminer.GetHintAsync();
+            if (hint != null)
+            {
+                Console.WriteLine($"Hint: {hint}");
+            }
             Console.WriteLine("Current state: " + gameDeterminer.GetCurrentState());
             Console.Write("Guess a letter: ");
             char guessedLetter = Console.ReadKey().KeyChar;
@@ -21,12 +27,6 @@ class Hangman
             {
                 gameDeterminer.DecrementMaxAttempts();
                 Console.WriteLine($"Wrong guess! You have {gameDeterminer.GetRemainingAttempts()} attempts left.");
-
-                var hint = await gameDeterminer.GetHintAsync();
-                if (hint != null)
-                {
-                    Console.WriteLine($"Hint: {hint}");
-                }
             }
             else
             {
@@ -38,7 +38,7 @@ class Hangman
         }
         if (gameDeterminer.WasTheWordGuessed())
         {
-            Console.WriteLine("Congratulations! You've guessed the word." + gameDeterminer.GetSecretWord());
+            Console.WriteLine("Congratulations! You've guessed the word " + gameDeterminer.GetSecretWord());
         }
         else
         {
