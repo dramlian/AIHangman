@@ -1,7 +1,7 @@
 class Hangman
 {
-    GameDeterminer gameDeterminer;
-    Drawing drawing;
+    readonly GameDeterminer gameDeterminer;
+    readonly Drawing drawing;
     public Hangman(GameDeterminer gameDeterminer)
     {
         this.gameDeterminer = gameDeterminer;

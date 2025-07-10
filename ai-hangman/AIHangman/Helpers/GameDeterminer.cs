@@ -1,6 +1,6 @@
 class GameDeterminer
 {
-    string secretWord;
+    readonly string secretWord;
     IEnumerable<char> guessedLetters;
     int maxAttempts;
     Func<string, Task<string>>? getHintFunc;

@@ -2,19 +2,20 @@ using Microsoft.Extensions.AI;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-class AIConnector
+class LocalAIModelProvider : IAIConnector
 {
-    string uri;
+    readonly string uri;
+    readonly string model;
+    readonly IChatClient chatClient;
 
-    string model;
-
-    public AIConnector(string uri, string model)
+    public LocalAIModelProvider(string uri, string model)
     {
         this.uri = uri;
         this.model = model;
+        chatClient = PrepareChatClient();
     }
 
-    public IChatClient GetChatClient()
+    private IChatClient PrepareChatClient()
     {
         var builder = Host.CreateApplicationBuilder();
 
@@ -25,9 +26,9 @@ class AIConnector
         return app.Services.GetRequiredService<IChatClient>();
     }
 
-    public async Task<string> GetResponseAsync(IChatClient chantClient, string prompt)
+    public async Task<string> GetResponseAsync(string prompt)
     {
-        return (await chantClient.GetResponseAsync(prompt)).Text.Trim();
+        return (await chatClient.GetResponseAsync(prompt)).Text.Trim();
     }
 
 }

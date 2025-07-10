@@ -1,6 +1,6 @@
 class Drawing
 {
-    string fullDrawing = "  +---+\n  |   |\n  O   |\n /|\\  |\n / \\  |\n      |\n=========";
+    readonly string fullDrawing = "  +---+\n  |   |\n  O   |\n /|\\  |\n / \\  |\n      |\n=========";
 
     int maxAttempts;
 
